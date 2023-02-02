@@ -49,12 +49,11 @@ public class Main{
 				}
 			}
 			catch(NumberFormatException e){
-				System.out.println("throws Exception");
+				return ("throws Exception");
 			}
 		}
 		catch(MyException e){
-			System.out.println("throws Exception");
+			return ("throws Exception");
 		}
-		return "0";
 	}
 }
