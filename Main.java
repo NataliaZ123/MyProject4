@@ -1,59 +1,79 @@
 import java.util.Scanner;
 
-public class Main{
-	
-	public static void main(String[] args){
-	    Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        System.out.println(calc(input));
-	}
-	
-	public static String calc(String input) {
-		try{
-			int a, b, c;
-			String [] strings = input.split(" ");
-			if(strings.length != 3){
-				throw new MyException();
-			}
-			char t = '1';
-			for (char ch : input.toCharArray()) {
-				t = ch;
-			}
-			if(t == ' '){
-				throw new MyException();
-			}
-			if((strings[0].compareTo("1") != 0) && (strings[0].compareTo("2") != 0) && (strings[0].compareTo("3") != 0) && (strings[0].compareTo("4") != 0) && (strings[0].compareTo("5") != 0) && (strings[0].compareTo("6") != 0) && (strings[0].compareTo("7") != 0) && (strings[0].compareTo("8") != 0) && (strings[0].compareTo("9") != 0) && (strings[0].compareTo("10") != 0)){	
-				throw new MyException();
-			}
-			if((strings[2].compareTo("1") != 0) && (strings[2].compareTo("2") != 0) && (strings[2].compareTo("3") != 0) && (strings[2].compareTo("4") != 0) && (strings[2].compareTo("5") != 0) && (strings[2].compareTo("6") != 0) && (strings[2].compareTo("7") != 0) && (strings[2].compareTo("8") != 0) && (strings[2].compareTo("9") != 0) && (strings[2].compareTo("10") != 0)){	
-				throw new MyException();
-			}
-			try{
-				a = Integer.parseInt(strings[0]);
-				b = Integer.parseInt(strings[2]);
-				switch (strings[1]){
-					case "+":
-						c = a + b;
-						return String.valueOf(c);
-					case "-":
-						c = a - b;
-						return String.valueOf(c);
-					case "*":
-						c = a * b;
-						return String.valueOf(c);
-					case "/":
-						c = a / b;
-						return String.valueOf(c);
-					default:
-						throw new MyException();
-				}
-			}
-			catch(NumberFormatException e){
-				return ("throws Exception");
-			}
-		}
-		catch(MyException e){
-			return ("throws Exception");
-		}
-	}
+public class Main {
+    public static void main(String[] args) throws MyException {
+        Scanner scan = new Scanner(System.in);
+        Calculator(scan.nextLine());
+    }
+    static void Calculator(String s) throws MyException {
+        int a = 0, b = 0, c;
+        boolean bb = false;
+        String[] roman = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+        String[] numbers = {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        String [] strings = s.split(" ");
+        for(int i = 1; i < roman.length; i++){
+            if(strings[0].equals(roman[i])){
+                a = i;
+            }
+        }
+        if(a != 0){
+            bb = true;
+            for(int i = 1; i < roman.length; i++){
+                if(strings[2].equals(roman[i])){
+                    b = i;
+                }
+            }
+        }
+        if(b == 0 && a == 0){
+            for(int i = 1; i < numbers.length; i++){
+                if(strings[0].equals(numbers[i])){
+                    a = i;
+                }
+            }
+            if(a != 0){
+                for(int i = 1; i < numbers.length; i++){
+                    if(strings[2].equals(numbers[i])){
+                        b = i;
+                    }
+                }
+            }
+        }
+        if(b == 0 || a == 0){
+            throw new MyException();
+        }
+        switch(strings[1]){
+            case "+":
+                c = a+b;
+                break;
+            case "-":
+                c = a-b;
+                break;
+            case "/":
+                c = a/b;
+                break;
+            case "*":
+                c = a*b;
+                break;
+            default:
+                throw new MyException();
+        }
+        if (bb == true){
+            if(c<1){
+                throw new MyException();
+            }
+            String s3 = "";
+            String[] strings1 = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+            if(c == 100){
+                System.out.println("C");
+            }
+            else{
+                s3 += strings1[c/10];
+                s3 += roman[c%10];
+                System.out.println(s3);
+            }
+        }
+        else{
+            System.out.println(c);
+        }
+    }
 }
