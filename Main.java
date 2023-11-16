@@ -11,16 +11,19 @@ public class Main {
         String[] roman = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
         String[] numbers = {"", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         String [] strings = s.split(" ");
+        if (strings.length != 3){
+            throw new MyException();
+        }
         for(int i = 1; i < roman.length; i++){
             if(strings[0].equals(roman[i])){
                 a = i;
             }
         }
         if(a != 0){
-            bb = true;
             for(int i = 1; i < roman.length; i++){
                 if(strings[2].equals(roman[i])){
                     b = i;
+                    bb = true;
                 }
             }
         }
