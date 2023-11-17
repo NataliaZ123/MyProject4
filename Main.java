@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws MyException {
         Scanner scan = new Scanner(System.in);
-        Calculator(scan.nextLine());
+        System.out.println(Calculator(scan.nextLine()));
     }
-    static void Calculator(String s) throws MyException {
+    static String Calculator(String s) throws MyException {
         int a = 0, b = 0, c;
         boolean bb = false;
         String[] roman = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
@@ -67,16 +67,16 @@ public class Main {
             String s3 = "";
             String[] strings1 = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
             if(c == 100){
-                System.out.println("C");
+                return "C";
             }
             else{
                 s3 += strings1[c/10];
                 s3 += roman[c%10];
-                System.out.println(s3);
+                return s3;
             }
         }
         else{
-            System.out.println(c);
+            return String.valueOf(c);
         }
     }
 }
